@@ -53,7 +53,7 @@ function validateOTP(email, otp) {
 
 async function sendEmailOTP(email, otp) {
   const mailOptions = {
-    from: '"Subzero Support" <support@mrfrank.site>',
+    from: '"Subzero Support" <darrelmucheri@gmail.com>',
     to: email,
     subject: 'Your OTP Code',
     text: `Hi there !\n\nYour OTP code is ${otp}. It is valid for 5 minutes. Do not share it.`,
