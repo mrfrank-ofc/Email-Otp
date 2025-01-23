@@ -53,10 +53,10 @@ function validateOTP(email, otp) {
 
 async function sendEmailOTP(email, otp) {
   const mailOptions = {
-    from: '"Subzero Support" <darrelmucheri@gmail.com>',
+    from: '"TEAM SUBZERO INC" <darrelmucheri@gmail.com>',
     to: email,
     subject: 'Your OTP Code',
-    text: `Hi there !\n\nYour OTP code is ${otp}. It is valid for 5 minutes. Do not share it.`,
+    text: `Hi there !\n\nYour OTP code is ${otp}. It is valid for 5 minutes. Do not share it.\n\n For more visit:\nhttps://mrfrankinc.vercel.app `,
   };
 
   try {
@@ -94,5 +94,5 @@ app.post('/validate', (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+  console.log(`Follow @mrfrank-ofc on github. Server is running on http://localhost:${PORT}`);
 });
