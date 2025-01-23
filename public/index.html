@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OTP Generator</title>
+  <title>OTP Verification</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -54,7 +54,7 @@
 <body>
 
   <div class="container">
-    <h1>Sign in with OTP</h1>
+    <h1>OTP Verification</h1>
 
     <!-- Form to input email and generate OTP -->
     <form id="otpForm">
@@ -65,7 +65,7 @@
     <!-- Form to input OTP -->
     <form id="otpValidateForm" style="display:none;">
       <input type="text" id="otp" placeholder="Enter OTP" required />
-      <button type="submit">Validate OTP</button>
+      <button type="submit">Submit OTP</button>
     </form>
 
     <div class="message" id="message"></div>
@@ -86,6 +86,7 @@
       messageDiv.textContent = 'Sending OTP...';
 
       try {
+        // Request to generate OTP
         const response = await fetch('https://subzero-email-otp.onrender.com/generate', {
           method: 'POST',
           headers: {
@@ -97,9 +98,9 @@
         const data = await response.json();
 
         if (data.success) {
-          userEmail = email;  // Store email for OTP validation
+          userEmail = email; // Store email for OTP validation
           messageDiv.style.color = 'green';
-          messageDiv.textContent = 'OTP sent successfully to your email..';
+          messageDiv.textContent = 'OTP sent successfully to your email.';
 
           // Show OTP validation form
           document.getElementById('otpValidateForm').style.display = 'block';
@@ -125,6 +126,7 @@
       messageDiv.textContent = 'Validating OTP...';
 
       try {
+        // Request to validate OTP
         const response = await fetch('https://subzero-email-otp.onrender.com/validate', {
           method: 'POST',
           headers: {
@@ -137,10 +139,13 @@
 
         if (data.success) {
           messageDiv.style.color = 'green';
-          messageDiv.textContent = 'OTP is valid!';
+          messageDiv.textContent = 'OTP is valid! Redirecting...';
+          setTimeout(() => {
+            window.location.href = 'https://mrfrankinc.vercel.app'; // Replace with your site URL
+          }, 2000); // Redirect after 2 seconds
         } else {
           messageDiv.style.color = 'red';
-          messageDiv.textContent = `Error: ${data.message}`;
+          messageDiv.textContent = 'Invalid OTP. Please try again.';
         }
       } catch (error) {
         messageDiv.style.color = 'red';
